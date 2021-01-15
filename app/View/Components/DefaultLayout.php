@@ -23,6 +23,6 @@ class DefaultLayout extends Component
      */
     public function render()
     {
-        return view('components.default-layout');
+        return view('layouts.default');
     }
 }
