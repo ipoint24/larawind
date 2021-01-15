@@ -29,12 +29,20 @@
         </a>
         <!-- end link -->
 
+        <!-- link -->
+        <a href="{{url('dashboard')}}"
+           class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-shopping-cart text-xs mr-2"></i>
+            Dashboard
+        </a>
+        <!-- end link -->
+
         <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">admin</p>
 
         <!-- link -->
         <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fad fa-chart-pie text-xs mr-2"></i>
-            Dashbaord
+            Dashboard
         </a>
         <!-- end link -->
 
@@ -135,4 +143,4 @@
     <!-- end sidebar content -->
 
 </div>
-<!-- end sidbar -->
+<!-- end sidebar -->
