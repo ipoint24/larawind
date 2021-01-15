@@ -1,5 +1,18 @@
 <x-default-layout>
 
+    <h1>Test</h1>
+    <!-- Base-Section -->
+    <x-section.base icon="fad fa-users" text="test">
+        <x-form.group>
+            <x-form.label for="first_name">
+                Label
+            </x-form.label>
+            <x-form.input id="first_name" placeholder="First name" name="name"/>
+            <x-form.helptext>
+                Hilfstext
+            </x-form.helptext>
+        </x-form.group>
+    </x-section.base>
 
     <div class="py-12">
         <div class="report-card">
