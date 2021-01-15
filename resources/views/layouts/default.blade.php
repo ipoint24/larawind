@@ -4,18 +4,21 @@
 
 
     <!-- strat wrapper -->
-        <div class="h-screen flex flex-row flex-wrap">
+    <div class="h-screen flex flex-row flex-wrap">
 
-        @include('layouts.partials.sidebar')
+    @include('layouts.partials.sidebar')
 
-        <!-- strat content -->
+    <!-- strat content -->
+    <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+        Breadcrumbs
         <main>
             {{$slot}}
         </main>
-        <!-- end content -->
+    </div>
+    <!-- end content -->
 
-        </div>
-        <!-- end wrapper -->
+    </div>
+    <!-- end wrapper -->
 
-        @include('layouts.partials.footer')
+    @include('layouts.partials.footer')
 
