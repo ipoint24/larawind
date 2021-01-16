@@ -1,9 +1,19 @@
-<div {{ $attributes->merge(['class'=>'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col my-2'])}}>
-    <div class="-mx-3 md:flex mb-6">
-        <x-section.heading>
-            <x-slot name="icon">{{ $icon }}</x-slot>
-            <x-slot name="text">{{ $text }}</x-slot>
-        </x-section.heading>
-        {{$slot}}
+@props([
+'top' => '',
+'bottom' => ''
+])
+<div class="py-12">
+    <div class="report-card">
+        <div class="card">
+            <div class="card-body flex flex-col">
+                <div class="flex flex-row justify-left items-center">
+                    {{$top}}
+                </div>
+                <div class="mt-8">
+                    {{$bottom}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
