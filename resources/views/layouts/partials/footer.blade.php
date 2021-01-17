@@ -2,8 +2,8 @@
 @stack('modals')
 @yield('scripts')
 @livewireScripts
-<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script src="{{url('js/scripts.js')}}"></script>
+
+<script src="{{url('js/output.js')}}"></script>
 <!-- end script -->
 
 </body>
