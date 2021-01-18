@@ -8,9 +8,7 @@
 @include('layouts.partials.sidebar')
 <!-- content -->
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
-        <ul>
-            <x-tabuna-breadcrumbs/>
-        </ul>
+        @include('layouts.partials.breadcrumbs')
         @include('layouts.partials.flash')
         <main>
             <div class="report-card">
