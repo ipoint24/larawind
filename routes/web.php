@@ -29,4 +29,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/test', function () {
         return view('test');
     })->name('test');
+
 });
