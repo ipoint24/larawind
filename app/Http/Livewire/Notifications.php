@@ -10,6 +10,7 @@ class Notifications extends Component
         "flash_message" => "flashMessage"
     ];
 
+
     public function flashMessage($type, $msg)
     {
         session()->flash($type, $msg);

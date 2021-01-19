@@ -1,4 +1,4 @@
-<div class="pt-3 pb-3">
+<div class="pt-3 pb-1">
     <div class="container">
         <ol class="bg-gray-200 h-12 rounded-md flex p-3">
             @if(Breadcrumbs::has())

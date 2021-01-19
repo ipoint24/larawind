@@ -74,9 +74,10 @@ class Posts extends Component
 
         session()->flash('message',
             $this->post_id ? 'Post Updated Successfully.' : 'Post Created Successfully.');
-        $type = "success";
-        $message = 'Post Created Successfully';
+        $type = "info";
+        $message = 'Post Created';
         $this->emitTo('notifications', 'flash_message', $type, $message);
+        $this->emit('flash_message', $type, $message);
         $this->closeModal();
         $this->resetInputFields();
     }
