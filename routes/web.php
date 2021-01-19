@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Posts;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+
+// Models
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +44,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('Test'), route('test'));
         });
+
+    Route::get('/posts', Posts::class)
+        ->name('posts')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('Posts'), route('posts'));
+        });;
 });
 
 /*

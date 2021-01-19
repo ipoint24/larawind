@@ -10,14 +10,9 @@
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
         @include('layouts.partials.breadcrumbs')
         @include('layouts.partials.flash')
+        @livewire('notifications')
         <main>
-            <div class="report-card">
-                <div class="card">
-                    <div class="card-body flex flex-col">
-                        @include('layouts.examples.test')
-                    </div>
-                </div>
-            </div>
+            {{$slot}}
         </main>
     </div>
 </div>
