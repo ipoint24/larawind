@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\Posts;
+use App\Http\Livewire\PostComments;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
@@ -49,6 +50,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('posts')
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('Posts'), route('posts'));
+        });;
+
+    Route::get('/post-comments', PostComments::class)
+        ->name('post-comments')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('PostComments'), route('post-comments'));
         });;
 });
 
