@@ -26,6 +26,7 @@
                                     class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded my-3">
                                 Create New Post
                             </button>
+
                             @if($isOpen)
                                 @include('livewire.posts.form_post')
                             @endif
@@ -39,7 +40,7 @@
                                     <th class="px-4 py-2 border">Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-gray-700 text-sm">
                                 @foreach($posts as $post)
                                     <tr>
                                         <td class="border px-4 py-2">{{ $post->id }}</td>
@@ -48,11 +49,11 @@
                                         <td class="border px-4 py-2">{{ $post->user->name }}</td>
                                         <td class="border px-4 py-2">
                                             <button wire:click="edit({{ $post->id }})"
-                                                    class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded">
+                                                    class="bg-indigo-500 hover:bg-indigo-700 text-gray-100 py-1 px-3 rounded">
                                                 <i class="fas fa-edit "></i>
                                             </button>
                                             <button wire:click="delete({{ $post->id }})"
-                                                    class="bg-red-400 hover:bg-red-700 text-gray-200 py-1 px-3 rounded">
+                                                    class="bg-red-500 hover:bg-red-700 text-gray-100 py-1 px-3 rounded">
                                                 <i class="fas fa-trash "></i>
                                             </button>
                                         </td>

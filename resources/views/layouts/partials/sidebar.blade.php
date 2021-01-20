@@ -24,7 +24,8 @@
         <!-- end link -->
 
         <!-- link -->
-        <a href="#" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a href="{{url('posts')}}"
+           class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fab fa-product-hunt text-xs mr-2"></i>
             Posts
         </a>

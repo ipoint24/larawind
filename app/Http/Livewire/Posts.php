@@ -72,12 +72,16 @@ class Posts extends Component
             'user_id' => auth()->user()->id
         ]);
 
+        $type = "success";
+        $message = $this->post_id ? 'Post Updated Successfully.' : 'Post Created Successfully.';
+        $title = "UpdateOrCreate-Title";
+        /*
         session()->flash('message',
             $this->post_id ? 'Post Updated Successfully.' : 'Post Created Successfully.');
-        $type = "info";
-        $message = 'Post Created';
+
         $this->emitTo('notifications', 'flash_message', $type, $message);
-        $this->emit('flash_message', $type, $message);
+        */
+        $this->emit('alert', ['type' => $type, 'message' => $message, 'title' => $title]);
         $this->closeModal();
         $this->resetInputFields();
     }
@@ -115,6 +119,10 @@ class Posts extends Component
     public function delete($id)
     {
         Post::find($id)->delete();
-        session()->flash('message', 'Post Deleted Successfully.');
+        // session()->flash('message', 'Post Deleted Successfully.');
+        $type = "success";
+        $title = "Überschrift";
+        $message = 'Post Deleted Successfully.';
+        $this->emit('alert', ['type' => $type, 'message' => $message, 'title' => $title]);
     }
 }

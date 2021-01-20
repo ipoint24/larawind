@@ -9,7 +9,6 @@
 <!-- content -->
     <div class="bg-gray-100 flex-1 p-4 md:mt-16">
         @include('layouts.partials.breadcrumbs')
-
         @livewire('notifications')
         <main>
             {{$slot}}
