@@ -15,10 +15,11 @@ class Posts extends Component
 
     public function render()
     {
-        $posts = Post::with('user')->paginate(10);
-        return view('livewire.posts.posts')
-            ->with('posts', $posts)
-            ->layout('layouts.default');
+        $posts = Post::with('user')->paginate(2);
+        return view('livewire.posts.posts',[
+            'posts' => $posts,
+        ])->layout('layouts.default');
+        // ->with('posts', $posts)
     }
 
     /**
@@ -124,5 +125,10 @@ class Posts extends Component
         $title = "Überschrift";
         $message = 'Post Deleted Successfully.';
         $this->emit('alert', ['type' => $type, 'message' => $message, 'title' => $title]);
+    }
+
+    public function paginationView()
+    {
+        return 'components.section.pagination-links';
     }
 }
