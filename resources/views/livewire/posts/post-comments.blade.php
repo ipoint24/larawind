@@ -9,25 +9,47 @@
             </h6>
         </x-slot>
         <x-slot name="bottom">
+            <section class="pt-3 pb-3">
+                <input type="file" id="image">
+            </section>
             <form class="w-2/3" wire:submit.prevent="addComment">
+                <div>
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="text-xs text-red-500">
+                    @error('newComment'){{$message}}@enderror
+                </div>
                 <input
                     type="text"
                     class="w-2/3 rounded border shadow p-2 mr-2 my-2"
                     placeholder="Whats in your mind"
-                    wire:model.lazy="newComment"
+                    wire:model.debounce.500ms="newComment"
                 >
                 <button type="submit" class="p-2 bg-blue-500 w-20 rounded shadow text-white">Add</button>
                 @foreach($comments as $comment)
                     <div class="rounded border shadow p-3 my-2">
-                        <div class="flex justify-start my-2">
-                            <p class="font-bold text-lg">{{$comment->title}}</p>
 
-                            <p class="mx-3 py1 text-xs text-gray-500 font-semibold">{{ $comment->dateForHumans($comment->created_at) }}</p>
+                        <div class="flex justify-between my-2">
+                            <div class="flex">
+                                <p class="font-bold text-lg">{{$comment->user->name}}</p>
+                                <p class="mx-3 py1 text-xs text-gray-500 font-semibold">{{ $comment->dateForHumans($comment->created_at) }}</p>
+                            </div>
+
+                            <p class="flex justify-end my-2 text-xs text-red-200 hover:text-red-600">
+                                <i class="fas fa-times cursor-pointer" wire:click="remove({{$comment->id}})"></i>
+                            </p>
                         </div>
                         <p class="text-gray-800">{{$comment->body}}</p>
                     </div>
                 @endforeach
             </form>
+            <div class="w-2/3">
+                {{ $comments->links() }}
+            </div>
         </x-slot>
     </x-section.base>
 </div>

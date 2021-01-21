@@ -18,6 +18,12 @@
             {{ session('info') }}
         </div>
     @endif
+    @if(session()->has('message'))
+        <div class="alert alert-info alert-dismissible fade show">
+            <!-- <button type="button" class="close" data-dismiss="alert">×</button> -->
+            {{ session('info') }}
+        </div>
+    @endif
 </div>
 
 @section('scripts')
