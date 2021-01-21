@@ -40,13 +40,17 @@ class PostComments extends Component
         $this->validate(['newComment' => 'required|max:255']);
         $image          = $this->storeImage();
         $createdComment = Comment::create([
-            'body'              => $this->newComment, 'user_id' => 1,
-            'image'             => $image,
-            'support_ticket_id' => $this->postId,
+            'title' => 'Title',
+            'body' => $this->newComment,
+            'user_id' => 1,
+            'image' => $image,
+            //'post_id' => $this->postId,
+            'post_id' => rand(0, 20),
         ]);
         $this->newComment = '';
         $this->image      = '';
         session()->flash('message', 'Comment added successfully 😁');
+
     }
 
     public function storeImage()
