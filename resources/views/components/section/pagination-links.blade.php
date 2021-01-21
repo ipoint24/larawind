@@ -28,9 +28,13 @@
 
             <!-- next  -->
             @if ($paginator->hasMorePages())
-                <li class="w-16 px-2 py-1 text-center rounded border shadow bg-white cursor-pointer" wire:click="nextPage">Next</li>
+                <li class="w-16 px-2 py-1 text-center rounded border shadow bg-white cursor-pointer"
+                    wire:click="nextPage">Next
+                </li>
             @else
-                <li class="w-16 px-2 py-1 text-center rounded border bg-gray-200">Next</li>
+                <li class="w-16 px-2 py-1 text-center rounded border bg-gray-200"
+                >Next
+                </li>
         @endif
         <!-- next end -->
         </ul>

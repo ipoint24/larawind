@@ -5,7 +5,13 @@
              wire:click="$emit('postSelected',{{$post->id}})">
             <div class="flex justify-between my-2">
                 <div class="flex">
-                    <p class="font-bold text-lg">{{$post->title}} [{{$post->id}}]</p>
+                    <p class="font-bold text-lg">
+                        {{$post->title}} [{{$post->id}}]
+                        @if(count($post->comments)>0)
+                            <span
+                                class="bg-blue-400 text-white mx-3 pl-1 pr-1 text-center rounded shadow">{{count($post->comments)}}</span>
+                        @endif
+                    </p>
                 </div>
             </div>
             <div class="flex">

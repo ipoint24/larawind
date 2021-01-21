@@ -4,41 +4,8 @@
     <!-- Base-Section -->
     <x-section.base>
         Test
-        <x-slot name="top">
-            <x-section.heading icon="fad fa-users" text="Title">
-                <x-slot name="description">Lorem ipsum</x-slot>
-            </x-section.heading>
-        </x-slot>
-        <x-slot name="bottom">
-            <x-form.form>
-                <x-slot name="title">
-                    {{ __('Update Password') }}
-                </x-slot>
 
-                <x-slot name="description">
-                    {{ __('Ensure your account is using a long, random password to stay secure.') }}
-                </x-slot>
-                <x-slot name="form">
-                    <x-form.group>
-                        <x-form.label for="first_name">
-                            Label
-                        </x-form.label>
-                        <x-form.input id="first_name" placeholder="First name" name="name"/>
-                        <x-form.helptext>
-                            Hilfstext
-                        </x-form.helptext>
-                    </x-form.group>
-                    <x-slot name="actions">
-                        <p>ActionMessage</p>
-                        <x-form.button>
-                            {{ __('Save') }}
-                        </x-form.button>
-                    </x-slot>
-                </x-slot>
-            </x-form.form>
-        </x-slot>
     </x-section.base>
-
     <div class="py-12">
         <div class="report-card">
             <div class="card">
