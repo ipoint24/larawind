@@ -11,10 +11,10 @@
         <x-slot name="bottom">
             <div class="flex justify-center">
                 <div class="w-full my-4 flex">
-                    <div class="w-1/3 rounded border p-2">
+                    <div class="w-6/12 rounded border p-2">
                         <livewire:posts/>
                     </div>
-                    <div class="w-2/3 mx-2 rounded border p-2">
+                    <div class="w-6/12 mx-2 rounded border p-2">
 
                         <section class="pt-3 pb-3">
                             <input type="file" id="image" wire:change="$emit('fileChoosen')">

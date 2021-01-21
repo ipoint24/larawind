@@ -12,10 +12,20 @@ class Posts extends Component
 
     public $title, $body, $post_id, $user_id;
     public $isOpen = 0;
+    public $active;
+
+    protected $listeners = [
+        'postSelected',
+    ];
+
+    public function postSelected($postId)
+    {
+        $this->active = $postId;
+    }
 
     public function render()
     {
-        $posts = Post::with('user')->paginate(10);
+        $posts = Post::with('user')->paginate(2);
         /*
         return view('livewire.posts.posts',[
             'posts' => $posts,
