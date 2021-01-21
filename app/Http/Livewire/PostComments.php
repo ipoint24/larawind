@@ -66,13 +66,14 @@ class PostComments extends Component
         $comment = Comment::find($commentId);
         Storage::disk('public')->delete($comment->image);
         $comment->delete();
-        session()->flash('message', 'Comment deleted successfully 😊');
+        session()->flash('message', 'Comment deleted successfully');
     }
 
     public function render()
     {
         return view('livewire.posts.post-comments', [
-            'comments' => Comment::where('post_id', $this->postId)->latest()->paginate(2),
+            //'comments' => Comment::where('post_id', $this->postId)->latest()->paginate(2),
+            'comments' => Comment::latest()->paginate(3),
         ])
         ->layout('layouts.default');
     }
