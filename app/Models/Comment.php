@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use App\Http\Traits\DateTimeTrait;
+use Illuminate\Support\Facades\Storage;
 
 class Comment extends Model
 {
@@ -13,11 +14,15 @@ class Comment extends Model
     use DateTimeTrait;
 
     protected $fillable = [
-        'title', 'body', 'user_id', 'post_id'
+        'title', 'body', 'user_id', 'post_id', 'image'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
 
+    public function getImagePathAttribute()
+    {
+        return Storage::disk('public')->url($this->image);
+    }
 
     public function post()
     {

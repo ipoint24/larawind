@@ -15,11 +15,15 @@ class Posts extends Component
 
     public function render()
     {
-        $posts = Post::with('user')->paginate(2);
+        $posts = Post::with('user')->paginate(10);
+        /*
         return view('livewire.posts.posts',[
             'posts' => $posts,
         ])->layout('layouts.default');
-        // ->with('posts', $posts)
+        */
+        return view('livewire.posts.posts-list', [
+            'posts' => $posts,
+        ])->layout('layouts.default');
     }
 
     /**

@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->integer('post_id');
             $table->text('body');
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
             // $table->foreignId('post_id')->constrained();

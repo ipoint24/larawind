@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Intervention\Image\ImageManagerStatic;
 use Livewire\Component;
 use App\Models\Comment;
 use Livewire\WithPagination;
@@ -38,19 +39,18 @@ class PostComments extends Component
     public function addComment()
     {
         $this->validate(['newComment' => 'required|max:255']);
-        $image          = $this->storeImage();
+        $image = $this->storeImage();
         $createdComment = Comment::create([
             'title' => 'Title',
             'body' => $this->newComment,
             'user_id' => 1,
             'image' => $image,
-            //'post_id' => $this->postId,
-            'post_id' => rand(0, 20),
+            'post_id' => $this->postId
         ]);
         $this->newComment = '';
         $this->image = '';
-        session()->flash('message', 'Comment added successfully');
-
+        // session()->flash('message', 'Comment added successfully');
+        $this->emit('alert', ['type' => 'success', 'message' => 'Comment added successfully', 'title' => 'Info']);
     }
 
     public function storeImage()
@@ -58,7 +58,6 @@ class PostComments extends Component
         if (!$this->image) {
             return null;
         }
-
         $img   = ImageManagerStatic::make($this->image)->encode('jpg');
         $name  = Str::random() . '.jpg';
         Storage::disk('public')->put($name, $img);
@@ -68,18 +67,17 @@ class PostComments extends Component
     public function remove($commentId)
     {
         $comment = Comment::find($commentId);
-        //Storage::disk('public')->delete($comment->image);
+        Storage::disk('public')->delete($comment->image);
         $comment->delete();
-        // $this->resetPage();
-        session()->flash('message', 'Comment deleted successfully');
+        // session()->flash('message', 'Comment deleted successfully');
         $this->emit('alert', ['type' => 'success', 'message' => 'Comment ' . $commentId . ' deleted successfully', 'title' => 'Info']);
     }
 
     public function render()
     {
         return view('livewire.posts.post-comments', [
-            //'comments' => Comment::where('post_id', $this->postId)->latest()->paginate(2),
-            'comments' => Comment::latest()->paginate(5),
+            'comments' => Comment::where('post_id', $this->postId)->latest()->paginate(2),
+            //'comments' => Comment::latest()->paginate(5),
         ])
             ->layout('layouts.default');
     }
