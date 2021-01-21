@@ -15,4 +15,9 @@ class HomeController extends Controller
     {
         return view('test');
     }
+
+    public function todos()
+    {
+        return view('todos.base');
+    }
 }

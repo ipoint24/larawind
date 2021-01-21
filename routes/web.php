@@ -63,6 +63,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('FileUploader'), route('file-uploads'));
         });
+    Route::get('/todos', [HomeController::class, 'todos'])
+        ->name('todos')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->push(__('Todos'), route('todos'));
+        });
 });
 
 /*

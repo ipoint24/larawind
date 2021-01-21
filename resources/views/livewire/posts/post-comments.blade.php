@@ -9,7 +9,6 @@
             </h6>
         </x-slot>
         <x-slot name="bottom">
-            @livewire('file-uploader')
             <div class="flex justify-center">
                 <div class="w-full my-4 flex">
                     <div class="w-6/12 rounded border p-2">

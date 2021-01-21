@@ -25,6 +25,22 @@
         <!-- end link -->
 
         <!-- link -->
+        <a href="{{url('todos')}}"
+           class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-chart-pie text-xs mr-2"></i>
+            Todos
+        </a>
+        <!-- end link -->
+
+        <!-- link -->
+        <a href="{{url('fileuploads')}}"
+           class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-chart-pie text-xs mr-2"></i>
+            Fileuploads
+        </a>
+        <!-- end link -->
+
+        <!-- link -->
         <a href="{{url('posts')}}"
            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fab fa-product-hunt text-xs mr-2"></i>
