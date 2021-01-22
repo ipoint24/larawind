@@ -6,7 +6,7 @@ use Livewire\Component;
 use Log;
 use App\Http\Requests\TodoFormRequest;
 use DB;
-use App\Todo;
+use App\Models\Todo;
 use Exception;
 
 class FormComponent extends Component
@@ -14,7 +14,7 @@ class FormComponent extends Component
 
     public $submit_btn_title = "Save Task";
     public $form = [
-        "todo_id" => NULL,
+        "id" => NULL,
         "title" => "",
         "desc" => "",
         "status" => "",
@@ -29,11 +29,11 @@ class FormComponent extends Component
 
     }
 
-    public function edit($todo_id)
+    public function edit($id)
     {
         try {
             $this->submit_btn_title = "Update Task";
-            $todo = TodoModel::find($todo_id);
+            $todo = Todo::find($id);
             $this->form = $todo->toArray();
         } catch (Exception $ex) {
 
@@ -42,6 +42,7 @@ class FormComponent extends Component
 
     public function save()
     {
+
         $form = new TodoFormRequest();
         $form->merge($this->form);
         $validated_data = $form->validate($form->rules());
@@ -55,10 +56,10 @@ class FormComponent extends Component
             ];
 
             $condition = [
-                "todo_id" => $validated_data["todo_id"]
+                "id" => $validated_data["id"]
             ];
 
-            $info["todo"] = TodoModel::updateOrCreate($condition, $query);
+            $info["todo"] = Todo::updateOrCreate($condition, $query);
 
             DB::commit();
             $info['success'] = TRUE;
@@ -83,13 +84,13 @@ class FormComponent extends Component
             $message = "Something went wrong while saving task.";
         }
 
-        $this->emitTo('todo.todo-notification-component', 'flash_message', $type, $message);
+        $this->emitTo('todos.todo-notification-component', 'flash_message', $type, $message);
 
-        $this->emitTo('todo.list-component', 'load_list');
+        $this->emitTo('todos.list-component', 'load_list');
     }
 
     public function render()
     {
-        return view('livewire.todo.create_form');
+        return view('livewire.todos.create_form');
     }
 }

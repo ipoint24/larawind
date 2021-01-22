@@ -24,7 +24,7 @@ class TodoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'todo_id' => 'nullable',
+            'id' => 'nullable',
             'title' => 'required',
             'desc' => 'nullable',
             'status' => 'required',

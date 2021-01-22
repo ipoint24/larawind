@@ -66,7 +66,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/todos', [HomeController::class, 'todos'])
         ->name('todos')
         ->breadcrumbs(function (Trail $trail) {
-            $trail->push(__('Todos'), route('todos'));
+            $trail->parent('dashboard')->push(__('Todos'), route('todos'));
+        });
+
+    Route::get('/companies', [HomeController::class, 'companies'])
+        ->name('companies')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('Companies'), route('companies'));
         });
 });
 

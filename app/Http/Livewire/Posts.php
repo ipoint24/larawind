@@ -15,7 +15,7 @@ class Posts extends Component
     public $active;
 
     protected $listeners = [
-        'postSelected',
+        'postSelected'
     ];
 
     public function postSelected($postId)
@@ -23,9 +23,15 @@ class Posts extends Component
         $this->active = $postId;
     }
 
+    public function loadList()
+    {
+        $posts = Post::with('user')->paginate(10);
+        return $posts;
+    }
+
     public function render()
     {
-        $posts = Post::with('user')->paginate(2);
+        $posts = $this->loadList();
         /*
         return view('livewire.posts.posts',[
             'posts' => $posts,
@@ -34,6 +40,7 @@ class Posts extends Component
         return view('livewire.posts.posts-list', [
             'posts' => $posts,
         ])->layout('layouts.default');
+
     }
 
     /**
@@ -46,6 +53,7 @@ class Posts extends Component
         $this->resetInputFields();
         $this->openModal();
     }
+
 
     /**
      * The attributes that are mass assignable.

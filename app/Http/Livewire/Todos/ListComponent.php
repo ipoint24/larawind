@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Todos;
 
 use Livewire\Component;
 use Log;
-use App\Todo;
+use App\Models\Todo;
 
 class ListComponent extends Component
 {
@@ -47,7 +47,7 @@ class ListComponent extends Component
             $query["status"] = $this->filter["status"];
         }
 
-        $objects = TodoModel::where($query);
+        $objects = Todo::where($query);
 
         // Search
         if (!empty($this->filter["search"])) {
@@ -93,6 +93,7 @@ class ListComponent extends Component
 
     public function render()
     {
-        return view('livewire.todo.list');
+        return view('livewire.todos.list')
+            ->layout('layouts.default');;
     }
 }

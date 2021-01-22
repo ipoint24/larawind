@@ -11,12 +11,12 @@
         </x-slot>
         <x-slot name="bottom">
             <div class="">
-                @livewire('todo.todo-notification-component')
+                @livewire('todos.todo-notification-component')
                 <!-- This component will show notification when todo is saved or updated -->
-                @livewire('todo.form-component') <!-- This component will display Todo form -->
+                @livewire('todos.form-component') <!-- This component will display Todo form -->
             </div>
             <div class="">
-                @livewire('todo.list-component') <!-- This component will list Todos -->
+                @livewire('todos.list-component') <!-- This component will list Todos -->
             </div>
         </x-slot>
 

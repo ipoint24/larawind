@@ -2,7 +2,7 @@
     <form wire:submit.prevent="save" method="post">
         <div class="row">
             <div class="col-md-12">
-                <input type="hidden" wire:model="form.todo_id">
+                <input type="hidden" wire:model="form.id">
                 <label for="">Title</label>
                 <input type="text" class="form-control" wire:model="form.title">
                 @error('title')

@@ -20,4 +20,9 @@ class HomeController extends Controller
     {
         return view('todos.base');
     }
+
+    public function companies()
+    {
+        return view('companies.base');
+    }
 }
