@@ -10,6 +10,7 @@ class Companies extends Component
 {
     use WithPagination;
 
+    public $confirming;
     public $title;
     public $description;
     public $company_id;
@@ -56,11 +57,25 @@ class Companies extends Component
         $this->resetValidation();
     }
 
+    public function updatedTitle()
+    {
+        $this->validate([
+            'title' => 'required|unique:companies,title,' . $this->company_id
+        ]);
+    }
+
+    public function updatedDescription()
+    {
+        $this->validate([
+            'description' => 'required|min:10|max:200'
+        ]);
+    }
+
     public function store()
     {
         $this->validate([
             'title' => 'required|unique:companies,title,' . $this->company_id,
-            'description' => 'required|max:200',
+            'description' => 'required|min:10|max:200',
         ]);
         $data = array(
             'title' => $this->title,
@@ -84,6 +99,11 @@ class Companies extends Component
         $this->title = $company->title;
         $this->description = $company->description;
         $this->openModal();
+    }
+
+    public function confirmDelete($id)
+    {
+        $this->confirming = $id;
     }
 
     public function delete($id)
