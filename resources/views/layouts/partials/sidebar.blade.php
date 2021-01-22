@@ -25,6 +25,14 @@
         <!-- end link -->
 
         <!-- link -->
+        <a href="{{url('orders')}}"
+           class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <i class="fad fa-chart-pie text-xs mr-2"></i>
+            Orders
+        </a>
+        <!-- end link -->
+
+        <!-- link -->
         <a href="{{url('companies')}}"
            class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fad fa-chart-pie text-xs mr-2"></i>

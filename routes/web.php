@@ -74,6 +74,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('Companies'), route('companies'));
         });
+
+    Route::get('/orders', [HomeController::class, 'orders'])
+        ->name('orders')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('Orders'), route('orders'));
+        });
 });
 
 /*

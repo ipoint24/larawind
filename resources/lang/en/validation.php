@@ -147,6 +147,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'description' => 'Custom Description',
+    ],
 
 ];

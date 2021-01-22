@@ -25,4 +25,9 @@ class HomeController extends Controller
     {
         return view('companies.base');
     }
+
+    public function orders()
+    {
+        return view('orders.base');
+    }
 }
