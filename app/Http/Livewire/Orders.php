@@ -18,6 +18,17 @@ class Orders extends Component
     public $filter = [
         "name" => ""
     ];
+    public $active;
+
+    protected $listeners = [
+        'orderSelected'
+    ];
+
+    public function orderSelected($orderId)
+    {
+        $this->active = $orderId;
+        $this->emitTo('products', 'orderSelected', $orderId);
+    }
 
     public function render()
     {
@@ -33,7 +44,7 @@ class Orders extends Component
         if (!empty($this->filter["name"])) {
             $orders = $orders->where('customer_name', 'LIKE', $this->filter['name'] . '%');
         }
-        $orders = $orders->paginate(1);
+        $orders = $orders->paginate(5);
         return $orders;
     }
 
@@ -112,7 +123,9 @@ class Orders extends Component
     public function delete($id)
     {
         $this->order_id = $id;
-        Order::find($id)->delete();
+        $order = Order::find($id);
+        $order->products()->delete();
+        $order->delete();
         $this->emit('alert', ['type' => 'success', 'message' => 'Order deleted', 'title' => 'Deleting']);
     }
 }

@@ -17,7 +17,8 @@
         </thead>
         <tbody class="text-gray-700 text-sm">
         @foreach($orders as $order)
-            <tr>
+            <tr class="rounded border shadow p-3 my-2 {{$active == $order->id ? 'bg-gray-400':''}}"
+                wire:click="$emit('orderSelected',{{$order->id}})">
                 <td class="border px-4 py-2">{{ $order->id }}</td>
                 <td class="border px-4 py-2">{{ $order->customer_name }}</td>
                 <td class="border px-4 py-2">{{ $order->customer_email }}</td>

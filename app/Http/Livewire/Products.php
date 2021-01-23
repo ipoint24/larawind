@@ -9,67 +9,69 @@ use App\Models\Product;
 
 class Products extends Component
 {
-    public $orderId = 1;
-    public $orderProducts;
+    public $orderId = 0;
+    public $orderProducts = [];
+    public $products;
     public $allProducts = [];
     public $selectedProducts = [];
+    public $activeProduct;
 
     protected $listeners = [
         'orderSelected',
     ];
 
-    public function loadList()
-    {
-        $orderId = $this->orderId;
-        $products = Product::with('orders')
-            ->whereHas('orders', function ($query) use ($orderId) {
-                $query->where('orders.id', $orderId);
-            })
-            ->get();
-        return $products;
-    }
-
     public function mount()
     {
-        $this->allProducts = Product::whereNotIn('id', $this->selectedProducts)->get();
-        $this->orderProducts = Order::with('products')->where('id', $this->orderId)->get();
-        /*
-        $this->orderProducts = [
-            ['product_id' => '', 'quantity' => 1]
-        ];
-        */
+
     }
 
-    /*
-    public function updatedOrderProducts($index)
+    public function loadList()
     {
-        $this->emit('productSelected', $index);
+        $order = Order::with('products')->find($this->orderId);
+        if ($order) {
+            $this->products = $order->products;
+            $this->selectedProducts = $order->products->pluck('id')->toArray();
+        } else {
+            $this->products = collect();
+        }
+        $this->allProducts = Product::orderBy('name')
+            ->whereNotIn('id', $this->selectedProducts)
+            ->get();
+        return $this->products;
     }
-    */
-    public function productSelected($productId)
+
+    public function orderSelected($orderId)
     {
-        array_push($this->selectedProducts, $productId);
-        // dd($this->selectedProducts);
-        // wire:change="$emit('productSelected',{{$product->id}})"
+        $this->orderId = $orderId;
+    }
+
+    public function activeProduct($productId)
+    {
+        $this->activeProduct = $productId;
     }
 
     public function addProduct()
     {
-        $this->orderProducts[] = ['product_id' => '', 'quantity' => 1];
+        if ($this->orderId > 0) {
+            $ord = Order::find($this->orderId);
+            $ord->products()->attach($this->activeProduct, ['quantity' => 1]);
+        }
     }
 
-    public function removeProduct($index)
+    public function removeProduct($id)
     {
-        unset($this->orderProducts[$index]);
-        $this->orderProducts = array_values($this->orderProducts);
+        if ($this->orderId > 0) {
+            $ord = Order::find($this->orderId);
+            $ord->products()->detach($id);
+        }
     }
 
     public function render()
     {
-        $products = $this->loadList();
+        $this->products = $this->loadList();
 
         return view('livewire.products.products', [
-            'products' => $products
+
         ]);
     }
 }
