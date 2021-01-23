@@ -15,6 +15,7 @@ class Products extends Component
     public $allProducts = [];
     public $selectedProducts = [];
     public $activeProduct;
+    public $isEditing = false;
 
     protected $listeners = [
         'orderSelected',

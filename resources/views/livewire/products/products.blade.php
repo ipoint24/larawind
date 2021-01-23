@@ -28,7 +28,13 @@
             <tr>
                 <td>{{$prod->name}}</td>
                 <td>{{ number_format($prod->price, 2) }}</td>
-                <td>{{$prod->pivot->quantity}}</td>
+                <td>
+                    @if(!isEditing)
+                        {{$prod->pivot->quantity}}
+                    @else
+                        input
+                    @endif
+                </td>
                 <td>
                     <button wire:click="removeProduct({{$prod->id}})"
                             class="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
