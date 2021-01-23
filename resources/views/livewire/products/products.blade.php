@@ -1,46 +1,27 @@
 <div>
-    @livewire('orders')
-    <table class="table" id="products_table">
+    <button wire:click="addProduct()"
+            class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded my-3">
+        + Add Product
+    </button>
+    <table class="table-auto w-full text-left" id="products_table">
         <thead>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th></th>
+        <tr class="bg-gray-100">
+            <th class="px-4 py-2 border">Product</th>
+            <th class="px-4 py-2 border">Price</th>
+            <th class="px-4 py-2 border">Quantity</th>
+            <th class="px-4 py-2 border">Actions</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($orderProducts as $index => $orderProduct)
+        @foreach($products as $prod)
             <tr>
-                <td>
-                    <select name="orderProducts[{{$index}}][product_id]"
-                            wire:model="orderProducts.{{$index}}.product_id"
-                            class="form-control">
-                        <option value="">-- choose product --</option>
-                        @foreach ($allProducts as $product)
-                            <option value="{{ $product->id }}">
-                                {{ $product->name }} (${{ number_format($product->price, 2) }})
-                            </option>
-                        @endforeach
-                    </select>
-                </td>
-                <td>
-                    <input type="number"
-                           name="orderProducts[{{$index}}][quantity]"
-                           class="form-control"
-                           wire:model="orderProducts.{{$index}}.quantity"/>
-                </td>
-                <td>
-                    <a href="#" wire:click.prevent="removeProduct({{$index}})">Delete</a>
-                </td>
+                <td>{{$prod->name}}</td>
+                <td>{{ number_format($prod->price, 2) }}</td>
+                <td>{{$prod->quantity}}</td>
+                <td></td>
             </tr>
         @endforeach
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-sm btn-secondary"
-                    wire:click.prevent="addProduct">+ Add Another Product
-            </button>
-        </div>
-    </div>
+
 </div>

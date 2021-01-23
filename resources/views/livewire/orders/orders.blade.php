@@ -1,56 +1,54 @@
-<div class="w-2/3">
-    <form>
-        <div class="-mx-3 md:flex mb-2">
-            <div class="md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="location">
-                    Location*
-                </label>
-                <div>
-                    <select
-                        class="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                        id="location">
-                        <option>Abuja</option>
-                        <option>Enugu</option>
-                        <option>Lagos</option>
-                    </select>
-                </div>
-            </div>
-            <div class="md:w-1/2 px-3">
-                <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="job-type">
-                    Job Type*
-                </label>
-                <div>
-                    <select
-                        class="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                        id="job-type">
-                        <option>Full-Time</option>
-                        <option>Part-Time</option>
-                        <option>Internship</option>
-                    </select>
-                </div>
-            </div>
-            <div class="md:w-1/2 px-3">
-                <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="department">
-                    Department*
-                </label>
-                <div>
-                    <select
-                        class="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
-                        id="department">
-                        <option>Engineering</option>
-                        <option>Design</option>
-                        <option>Customer Support</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="-mx-3 md:flex mt-2">
-            <div class="md:w-full px-3">
-                <button
-                    class="md:w-full bg-gray-900 text-white font-bold py-2 px-4 border-b-4 hover:border-b-2 border-gray-500 hover:border-gray-100 rounded-full">
-                    Button
-                </button>
-            </div>
-        </div>
-    </form>
+<div>
+    <button wire:click="create()"
+            class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded my-3">
+        Create New Order
+    </button>
+    @if($isOpen)
+        @include('livewire.orders.form_order')
+    @endif
+    <table class="table-auto w-full text-left">
+        <thead>
+        <tr class="bg-gray-100">
+            <th class="px-4 py-2 w-20 border">No.</th>
+            <th class="px-4 py-2 border">Customer</th>
+            <th class="px-4 py-2 border">E-Mail</th>
+            <th class="px-4 py-2 border">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="text-gray-700 text-sm">
+        @foreach($orders as $order)
+            <tr>
+                <td class="border px-4 py-2">{{ $order->id }}</td>
+                <td class="border px-4 py-2">{{ $order->customer_name }}</td>
+                <td class="border px-4 py-2">{{ $order->customer_email }}</td>
+                <td class="border px-4 py-2">
+                    <div class="inline-block whitespace-no-wrap">
+                        <button wire:click="edit({{ $order->id }})"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Edit
+                        </button>
+                        @if($confirming===$order->id)
+                            <button wire:click="delete({{ $order->id  }})"
+                                    class="bg-red-800 text-white w-32 px-4 py-1 hover:bg-red-600 rounded border">
+                                Sure?
+                            </button>
+                        @else
+                            <button
+                                wire:click="confirmDelete({{ $order->id }})"
+                                class="bg-gray-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </button>
+                        @endif
+                    </div>
+                </td>
+            </tr>
+        @endforeach
+
+        </tbody>
+    </table>
+    <div>
+        {{ $orders->links('components.section.pagination',['is_livewire' => true]) }}
+    </div>
+
 </div>
+

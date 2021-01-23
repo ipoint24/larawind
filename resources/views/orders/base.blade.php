@@ -5,12 +5,18 @@
                 Laravel Livewire: Parent-Child Form Example
             </h2>
             <h6>
-                <a href="https://www.youtube.com/watch?v=iuIEqOcQi6g">Quelle</a>
+
             </h6>
         </x-slot>
         <x-slot name="bottom">
-            Kunde
-            @livewire('products')
+            <div class="flex flex-wrap content-start">
+                <div class="w-1/2 overflow-scroll py-24">
+                    @livewire('orders')
+                </div>
+                <div class="w-1/2 overflow-scroll py-24">
+                    @livewire('products')
+                </div>
+            </div>
         </x-slot>
     </x-section.base>
 </x-default-layout>>

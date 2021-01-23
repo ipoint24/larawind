@@ -11,6 +11,12 @@ class Product extends Model
 
     protected $fillable = ['name', 'price'];
 
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)
+            ->withPivot('deleted_at', 'quantity');
+    }
+
     public function getPriceAttribute()
     {
         return $this->attributes['price'] / 100;
