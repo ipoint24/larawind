@@ -33,7 +33,7 @@
                 <td>
                     @if($prod->id == $rowToEdit)
                         <div class="flex">
-                            <input wire:model="quantity.{{$prod->id}}" type="text" value="{{$prod->pivot->quantity}}">
+                            <input class="w-20 bg-gray-400" wire:model="quantity.{{$prod->id}}" type="text">
                             <button
                                 wire:click="saveQuantity({{$prod->id}})"
                                 class="bg-gray-300 text-green-800"><i class="fas fa-check"></i></button>

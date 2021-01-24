@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use Livewire\Component;
 use App\Models\Product;
+use Log;
 
 class Products extends Component
 {
@@ -13,11 +14,13 @@ class Products extends Component
     public $order = [];
     public $orderProducts = [];
     public $products;
+    public $productQuantities = [];
     public $allProducts = [];
     public $selectedProducts = [];
     public $activeProduct;
-    public $quantity = 0;
+    public $quantity = [];
     public $rowToEdit = 0;
+
     protected $listeners = [
         'orderSelected',
     ];
@@ -29,8 +32,15 @@ class Products extends Component
 
     public function editRow($id)
     {
+        //dd($this->test);
+        $this->quantity[$id] = 34;
+        foreach ($this->productQuantities as $key => $value) {
+            if ($value['id'] == $id) {
+                $this->quantity[$id] = $value['pivot']['quantity'];
+            }
+        }
         $this->rowToEdit = $id;
-        $this->emit('alert', ['type' => 'success', 'message' => 'CLickedOnIndex' . $id, 'title' => 'Info']);
+        $this->emit('alert', ['type' => 'success', 'message' => 'CLickedOnIndex' . $id . 'with Quantity: ' . $this->quantity[$id], 'title' => 'Info']);
     }
 
     public function movQuantity($index, $dir)
@@ -57,6 +67,7 @@ class Products extends Component
 
         if ($order) {
             $this->products = $order->products;
+            $this->productQuantities = $order->products->toArray();
             $this->selectedProducts = $order->products->pluck('id')->toArray();
         } else {
             $this->products = collect();
