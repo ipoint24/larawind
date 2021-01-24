@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\Acl\Acl;
 use App\Http\Livewire\FileUploader;
 use App\Http\Livewire\Posts;
 use App\Http\Livewire\PostComments;
@@ -79,6 +80,12 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->name('orders')
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('Orders'), route('orders'));
+        });
+
+    Route::get('/acl', Acl::class)
+        ->name('acl')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('Acl'), route('acl'));
         });
 });
 
