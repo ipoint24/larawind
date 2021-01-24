@@ -41,7 +41,9 @@
                     @else
                         <div class="flex">
                             {{$prod->pivot->quantity}}
-                            <button class="bg-blue-400" wire:click="editRow({{$prod->id}})">B</button>
+                            <button
+                                wire:click="editRow({{$prod->id}})"
+                                class="bg-gray-300 text-green-800"><i class="fas fa-edit"></i></button>
                         </div>
 
                     @endif
