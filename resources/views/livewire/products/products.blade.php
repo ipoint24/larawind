@@ -1,19 +1,21 @@
 <div>
-    <button wire:click="addProduct()"
-            class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded my-3">
-        + Add Product
-    </button>
+    @if($orderId>0)
+        <button wire:click="addProduct()"
+                class="bg-indigo-400 hover:bg-indigo-700 text-gray-200 py-1 px-3 rounded my-3">
+            + Add Product
+        </button>
 
-    SelectedProducts: {{count($selectedProducts)}}
-    <select wire:model="activeProduct">
-        <option value="">-- choose product --</option>
-        @foreach ($allProducts as $product)
-            <option value="{{ $product->id }}">
-                {{ $product->name }} (${{ number_format($product->price, 2) }})
-            </option>
-        @endforeach
-    </select>
-    Active Product : {{$activeProduct }}
+        SelectedProducts: {{count($selectedProducts)}}
+        <select wire:model="activeProduct">
+            <option value="">-- choose product --</option>
+            @foreach ($allProducts as $product)
+                <option value="{{ $product->id }}">
+                    {{ $product->name }} (${{ number_format($product->price, 2) }})
+                </option>
+            @endforeach
+        </select>
+        Active Product : {{$activeProduct }}
+    @endif
     <table class="table-auto w-full text-left" id="products_table">
         <thead>
         <tr class="bg-gray-100">
@@ -26,13 +28,22 @@
         <tbody>
         @foreach($products as $prod)
             <tr>
-                <td>{{$prod->name}}</td>
+                <td>{{$prod->name}} (Index: {{$loop->index}}, Produkt: {{$prod->id}}</td>
                 <td>{{ number_format($prod->price, 2) }}</td>
                 <td>
-                    @if(!isEditing)
-                        {{$prod->pivot->quantity}}
+                    @if($prod->id == $rowToEdit)
+                        <div class="flex">
+                            <input wire:model="quantity.{{$prod->id}}" type="text" value="{{$prod->pivot->quantity}}">
+                            <button
+                                wire:click="saveQuantity({{$prod->id}})"
+                                class="bg-gray-300 text-green-800"><i class="fas fa-check"></i></button>
+                        </div>
                     @else
-                        input
+                        <div class="flex">
+                            {{$prod->pivot->quantity}}
+                            <button class="bg-blue-400" wire:click="editRow({{$prod->id}})">B</button>
+                        </div>
+
                     @endif
                 </td>
                 <td>

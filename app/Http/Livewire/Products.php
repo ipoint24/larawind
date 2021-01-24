@@ -10,13 +10,14 @@ use App\Models\Product;
 class Products extends Component
 {
     public $orderId = 0;
+    public $order = [];
     public $orderProducts = [];
     public $products;
     public $allProducts = [];
     public $selectedProducts = [];
     public $activeProduct;
-    public $isEditing = false;
-
+    public $quantity = 0;
+    public $rowToEdit = 0;
     protected $listeners = [
         'orderSelected',
     ];
@@ -26,9 +27,34 @@ class Products extends Component
 
     }
 
+    public function editRow($id)
+    {
+        $this->rowToEdit = $id;
+        $this->emit('alert', ['type' => 'success', 'message' => 'CLickedOnIndex' . $id, 'title' => 'Info']);
+    }
+
+    public function movQuantity($index, $dir)
+    {
+        if ($dir == 'up') {
+            $this->quantity++;
+        } else {
+            $this->quantity--;
+        }
+
+    }
+
+    public function saveQuantity($prodId)
+    {
+        $order = Order::with('products')->find($this->orderId);
+        $order->products()->updateExistingPivot($prodId, ['quantity' => $this->quantity[$prodId]]);
+        $this->emit('alert', ['type' => 'success', 'message' => 'ProdId' . $prodId . ' & quantity' . $this->quantity[$prodId], 'title' => 'Info']);
+        $this->rowToEdit = 0;
+    }
+
     public function loadList()
     {
         $order = Order::with('products')->find($this->orderId);
+
         if ($order) {
             $this->products = $order->products;
             $this->selectedProducts = $order->products->pluck('id')->toArray();

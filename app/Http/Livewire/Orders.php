@@ -124,7 +124,7 @@ class Orders extends Component
     {
         $this->order_id = $id;
         $order = Order::find($id);
-        $order->products()->delete();
+        $order->products()->detach();
         $order->delete();
         $this->emit('alert', ['type' => 'success', 'message' => 'Order deleted', 'title' => 'Deleting']);
     }
