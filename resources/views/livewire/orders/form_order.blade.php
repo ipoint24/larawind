@@ -7,20 +7,20 @@
             <div class="flex flex-col">
                 <label class="leading-loose">Customer Name</label>
                 <input
-                    wire:model.debounce.500ms="name"
+                    wire:model.debounce.500ms="customer_name"
                     type="text"
                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     placeholder="Required">
-                @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
+                @error('customer_name') <span class="text-red-500">{{ $message }}</span>@enderror
             </div>
             <div class="flex flex-col">
                 <label class="leading-loose">Customer E-Mail</label>
                 <input
-                    wire:model.debounce.500ms="email"
+                    wire:model.debounce.500ms="customer_email"
                     type="text"
                     class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     placeholder="Required">
-                @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
+                @error('customer_email') <span class="text-red-500">{{ $message }}</span>@enderror
             </div>
 
         </x-slot>

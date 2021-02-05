@@ -11,8 +11,8 @@ class Orders extends Component
     use WithPagination;
 
     public $confirming;
-    public $name;
-    public $email;
+    public $customer_name;
+    public $customer_email;
     public $order_id;
     public $isOpen = 0;
     public $filter = [
@@ -69,31 +69,34 @@ class Orders extends Component
         $this->resetValidation();
     }
 
-    public function updatedName()
+    public function updatedCustomerName()
     {
         $this->validate([
-            'name' => 'required|unique:orders,customer_name,' . $this->order_id
+            'customer_name' => 'required|max:120|unique:orders,customer_name,' . $this->order_id
         ]);
     }
 
-    public function updatedEmail()
+    public function updatedCustomerEmail()
     {
         $this->validate([
-            'email' => 'required|email|unique:orders,customer_email,' . $this->order_id
+            'customer_email' => 'required|email|unique:orders,customer_email,' . $this->order_id
         ]);
     }
 
     public function store()
     {
-        $this->validate([
-            'name' => 'required|unique:orders,customer_name,' . $this->order_id,
-            'email' => 'required|email|unique:orders,customer_email,' . $this->order_id
+        $validatedAttributes = $this->validate([
+            'customer_name' => 'required|max:120|unique:orders,customer_name,' . $this->order_id,
+            'customer_email' => 'required|email|unique:orders,customer_email,' . $this->order_id
         ]);
+        /*
         $data = array(
             'customer_name' => $this->name,
             'customer_email' => $this->email,
         );
         $order = Order::updateOrCreate(['id' => $this->order_id], $data);
+        */
+        $order = Order::updateOrCreate(['id' => $this->order_id], $validatedAttributes);
         $type = "success";
         $message = $this->order_id ? 'Order Updated Successfully.' : 'Order Created Successfully.';
         $this->emit('alert', ['type' => $type, 'message' => $message, 'title' => 'Title']);
