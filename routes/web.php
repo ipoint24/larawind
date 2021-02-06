@@ -7,6 +7,7 @@ use App\Http\Livewire\Posts;
 use App\Http\Livewire\PostComments;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
+use App\Http\Controllers\PermissionDummydataController;
 
 // Models
 
@@ -87,8 +88,26 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         ->breadcrumbs(function (Trail $trail) {
             $trail->parent('dashboard')->push(__('Acl'), route('acl'));
         });
+
+    Route::get('/roles', 'PermissionController@createData')
+        ->name('dummydata')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push(__('Permission DummyData'), route('dummydata'));
+        });;
 });
 
+/*
+ *
+ * Route::group(['middleware' => 'role:developer'], function() {
+
+   Route::get('/admin', function() {
+
+      return 'Welcome Admin';
+
+   });
+
+});
+ */
 /*
  * Sample Breadcrumb
  * Route::get('/', [HomeController::class, 'index'])

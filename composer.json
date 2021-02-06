@@ -18,7 +18,6 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.0",
-        "spatie/laravel-permission": "^3.18",
         "tabuna/breadcrumbs": "^2.3"
     },
     "require-dev": {
