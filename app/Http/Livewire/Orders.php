@@ -87,7 +87,8 @@ class Orders extends Component
     {
         $validatedAttributes = $this->validate([
             'customer_name' => 'required|max:120|unique:orders,customer_name,' . $this->order_id,
-            'customer_email' => 'required|email|unique:orders,customer_email,' . $this->order_id
+            'customer_email' => 'required|email|unique:orders,customer_email,' . $this->order_id,
+            'created_at' => 'nullable|date',
         ]);
         /*
         $data = array(
@@ -123,10 +124,9 @@ class Orders extends Component
         $this->confirming = $id;
     }
 
-    public function delete($id)
+    public function delete(Order $order)
     {
-        $this->order_id = $id;
-        $order = Order::find($id);
+        $this->order_id = $order->id;
         $order->products()->detach();
         $order->delete();
         $this->emit('alert', ['type' => 'success', 'message' => 'Order deleted', 'title' => 'Deleting']);
