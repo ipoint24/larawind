@@ -16,9 +16,9 @@ class CompanyTest extends TestCase
 
     /*
      * Guest / RegUser
-     * Route
+     * Route / Livewire Component
      * Validation
-     * CRUD
+     * C(R)UD
      */
 
     public function test_guest_can_not_see_companies()
