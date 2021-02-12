@@ -55,6 +55,9 @@ class Products extends Component
 
     public function saveQuantity($prodId)
     {
+        $this->validate([
+            'quantity.*' => 'required|integer'
+        ]);
         $order = Order::with('products')->find($this->orderId);
         $order->products()->updateExistingPivot($prodId, ['quantity' => $this->quantity[$prodId]]);
         $this->emit('alert', ['type' => 'success', 'message' => 'ProdId' . $prodId . ' & quantity' . $this->quantity[$prodId], 'title' => 'Info']);
@@ -90,6 +93,7 @@ class Products extends Component
 
     public function addProduct()
     {
+
         if ($this->orderId > 0) {
             $ord = Order::find($this->orderId);
             $ord->products()->attach($this->activeProduct, ['quantity' => 1]);

@@ -88,7 +88,7 @@ class Orders extends Component
         $validatedAttributes = $this->validate([
             'customer_name' => 'required|max:120|unique:orders,customer_name,' . $this->order_id,
             'customer_email' => 'required|email|unique:orders,customer_email,' . $this->order_id,
-            'created_at' => 'nullable|date',
+            //'created_at' => 'nullable|date',
         ]);
         /*
         $data = array(

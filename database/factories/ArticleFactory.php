@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrderFactory extends Factory
+class ArticleFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Order::class;
+    protected $model = Article::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'customer_name' => $this->faker->company,
-            'customer_email' => $this->faker->email,
+            //
         ];
     }
 }
