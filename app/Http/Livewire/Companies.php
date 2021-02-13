@@ -73,15 +73,17 @@ class Companies extends Component
 
     public function store()
     {
-        $this->validate([
+        $validatedAttributes = $this->validate([
             'title' => 'required|unique:companies,title,' . $this->company_id,
             'description' => 'required|min:10|max:200',
         ]);
+        /*
         $data = array(
             'title' => $this->title,
             'description' => $this->description,
         );
-        $company = Company::updateOrCreate(['id' => $this->company_id], $data);
+        */
+        $company = Company::updateOrCreate(['id' => $this->company_id], $validatedAttributes);
         session()->flash('message', $this->company_id ? 'Company updated successfully.' : 'Company created successfully.');
         $this->closeModal();
         $this->resetInputFields();

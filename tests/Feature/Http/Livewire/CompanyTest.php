@@ -104,7 +104,6 @@ class CompanyTest extends TestCase
         $this->actingAs($user = User::factory()->create());
         $company = Company::factory()->create();
         Livewire::test(Companies::class)
-            //->set('company_id', $company->id)
             ->call('delete', $company->id);
         $this->assertTrue(Company::whereId($company->id)
             ->withTrashed()
