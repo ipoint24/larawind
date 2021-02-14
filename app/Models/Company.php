@@ -12,6 +12,7 @@ class Company extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'description'
+        'title', 'description', 'tenant_id'
     ];
+
 }

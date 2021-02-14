@@ -75,15 +75,16 @@ class Companies extends Component
     {
         $validatedAttributes = $this->validate([
             'title' => 'required|unique:companies,title,' . $this->company_id,
-            'description' => 'required|min:10|max:200',
+            'description' => 'required|min:10|max:200'
         ]);
-        /*
+
         $data = array(
             'title' => $this->title,
             'description' => $this->description,
+            'tenant_id' => auth()->user()->tenant_id,
         );
-        */
-        $company = Company::updateOrCreate(['id' => $this->company_id], $validatedAttributes);
+
+        $company = Company::updateOrCreate(['id' => $this->company_id], $data);
         session()->flash('message', $this->company_id ? 'Company updated successfully.' : 'Company created successfully.');
         $this->closeModal();
         $this->resetInputFields();
