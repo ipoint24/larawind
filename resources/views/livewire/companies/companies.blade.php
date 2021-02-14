@@ -11,6 +11,9 @@
             </button>
         </div>
     @endif
+    <div class="px-6 py-4 bg-gray-200">
+        {{App\Models\User::count()}}
+    </div>
     <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">
         Create New Company
     </button>
@@ -50,8 +53,13 @@
                                     </button>
                                     @if($confirming===$company->id)
                                         <button wire:click="delete({{ $company->id  }})"
-                                                class="bg-red-800 text-white w-32 px-4 py-1 hover:bg-red-600 rounded border">
+                                                class="bg-red-800 text-white px-4 py-2 hover:bg-red-600 rounded border">
                                             Sure?
+                                        </button>
+                                        <button
+                                            wire:click="cancelDelete({{ $company->id }})"
+                                            class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                            Cancel
                                         </button>
                                     @else
                                         <button

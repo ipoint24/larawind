@@ -103,6 +103,11 @@ class Companies extends Component
         $this->openModal();
     }
 
+    public function cancelDelete($id)
+    {
+        $this->confirming = 0;
+    }
+
     public function confirmDelete($id)
     {
         $this->confirming = $id;
