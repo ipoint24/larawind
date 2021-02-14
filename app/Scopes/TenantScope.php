@@ -20,8 +20,6 @@ class TenantScope implements Scope
     {
         if (session()->has('tenant_id')) {
             $builder->where('tenant_id', session()->get('tenant_id'));
-        } else {
-            Auth::logout();
         }
     }
 }
