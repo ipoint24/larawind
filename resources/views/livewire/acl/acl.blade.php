@@ -21,9 +21,10 @@
                 <div class="bg-red-100 mx-3 p-3">
                     See User Roles and Permissions
                 </div>
-
             </div>
         </x-slot>
     </x-section.base>
+    <!-- Hero Section -->
+
 </div>
 

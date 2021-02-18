@@ -5,7 +5,11 @@
     <link rel="shortcut icon" href="./img/fav.png" type="image/x-icon">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
     <!-- Styles -->
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.12.1/css/pro.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('css/output.css')}}">

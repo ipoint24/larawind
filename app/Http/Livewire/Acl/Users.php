@@ -19,6 +19,7 @@ class Users extends Component
     public $active;
     public $confirming;
     public $modalTitle = '';
+    public $originalId = 0;
 
     public function render()
     {
@@ -40,6 +41,14 @@ class Users extends Component
         $this->validate([
             'name' => 'required|unique:users,name,' . $this->user_id
         ]);
+    }
+
+    public function impersonate($userId)
+    {
+        $this->originalId = auth()->user()->id;
+        session()->put('impersonate', $this->originalId);
+        auth()->loginUsingId($userId);
+        return redirect('acl');
     }
 
     public function updatedEmail()

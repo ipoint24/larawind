@@ -28,11 +28,12 @@ class SetTenantIdInSession
      */
     public function handle($event)
     {
-
         if (!empty($event->user->tenant_id)) {
             session()->put('tenant_id', $event->user->tenant_id);
             session()->put('user_id', $event->user->id);
         } else {
+            session()->flash('message', 'Kein Mandant');
+            // redirect(route('welcome'));
             Auth::logout();
         }
     }

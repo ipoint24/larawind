@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImpersonationController;
 use App\Http\Livewire\Acl\Acl;
 use App\Http\Livewire\FileUploader;
 use App\Http\Livewire\Posts;
@@ -37,6 +38,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     */
+    Route::get('leave-impersonation', [ImpersonationController::class, 'leave'])
+        ->name('leave-impersonation');
     Route::get('/dashboard', [HomeController::class, 'dashboard'])
         ->name('dashboard')
         ->breadcrumbs(function (Trail $trail) {

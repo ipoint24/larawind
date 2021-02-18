@@ -6,9 +6,18 @@
 
         <x-jet-validation-errors class="mb-4"/>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
+        @if(session()->has('message'))
+            <div class="bg-teal-100 border-t-4 border-teal-100 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
+                 role="alert">
+                <div class="flex">
+                    <div>
+                        <p class="text-sm">{{ session('message') }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-error alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ session('message') }}
             </div>
         @endif
         @if($errors->any())

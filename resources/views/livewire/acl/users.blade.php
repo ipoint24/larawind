@@ -1,4 +1,5 @@
 <div>
+
     <button wire:click="create()"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded mt-4">
         Create New User
@@ -17,14 +18,21 @@
         @foreach($users as $user)
             <tr>
                 <td class="border px-4 py-2">{{$user->id}}</td>
-                <td class="border px-4 py-2">{{$user->name}}</td>
+                <td class="border px-4 py-2">
+                    <div>
+                        <span>{{$user->name}}</span>
+                        @if(auth()->user()->id <> $user->id and auth()->user()->hasRole(3))
+                            <a wire:click="impersonate({{$user->id}})" href="#" class="text-xs text-indigo-600">IMP</a>
+                        @endif
+                    </div>
+                </td>
                 <td class="border px-4 py-2">{{$user->email}}</td>
                 <td class="border px-4 py-2">
 
                     @if(!empty($user->getRoleNames()))
                         <ol>
                             @foreach($user->getRoleNames() as $v)
-                                <li>{{ $v }}</li>>
+                                <li>{{ $v }}</li>
                             @endforeach
                         </ol>
                     @endif
@@ -92,15 +100,17 @@
                         Close
                     </button>
                     <button
-                        wire:click.prevent="store()"
-                        class="text-gray-200 bg-teal-600 border hover:bg-gray-500 hover:text-white active:bg-teal-900 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                        style="transition: all .15s ease">
+                            wire:click.prevent="store()"
+                            class="text-gray-200 bg-teal-600 border hover:bg-gray-500 hover:text-white active:bg-teal-900 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1"
+                            type="button"
+                            style="transition: all .15s ease">
                         Save Changes
                     </button>
                 </x-slot>
             </form>
         </x-form.modal_simple>
-    @endif
+@endif
+<!-- Hero Section -->
+
 
 </div>

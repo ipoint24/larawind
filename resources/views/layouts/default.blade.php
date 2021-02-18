@@ -12,6 +12,8 @@
         @include('layouts.partials.flash')
         @livewire('notifications')
         <main>
+            @include('layouts.partials.banner')
+
             {{$slot}}
         </main>
     </div>
