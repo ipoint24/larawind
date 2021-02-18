@@ -14,12 +14,16 @@
     <div class="px-6 py-4 bg-gray-200">
         {{App\Models\User::count()}}
         {{ Auth::user()->roles->pluck('name') }}
-
     </div>
-    <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">
-        Create New Company
-    </button>
-    @if (count($companies)>0)
+        <!-- Test -->
+        <x-input.select2multiple wire:model="selectedTenants" id="selectedTenants" name="selectedTenants[]"
+                                 :options="$tenants" select-type="label"/>
+        <!-- Ende Test -->
+        <button wire:click="create()"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">
+            Create New Company
+        </button>
+        @if (count($companies)>0)
         <div class="py-10">
             <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
                 <table class="min-w-full leading-normal">

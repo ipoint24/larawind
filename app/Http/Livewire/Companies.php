@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Tenant;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Company;
@@ -15,6 +17,8 @@ class Companies extends Component
     public $description;
     public $company_id;
     public $isOpen = 0;
+    public $tenant_id = 0;
+    public $selectedTenants = [];
     public $filter = [
         "title" => ""
     ];
@@ -35,6 +39,7 @@ class Companies extends Component
         $companies = $companies->paginate(10);
         return $companies;
     }
+
 
     public function create()
     {
@@ -123,8 +128,10 @@ class Companies extends Component
 
     public function render()
     {
+        $tenants = Tenant::all();
         $companies = $this->loadList();
         return view('livewire.companies.companies')
-            ->with('companies', $companies);
+            ->with('companies', $companies)
+            ->with('tenants', $tenants);
     }
 }
