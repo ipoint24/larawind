@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Tabuna\Breadcrumbs\Trail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +23,19 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
-    Route::view('forms', 'forms')->name('forms');
+    Route::view('dashboard', 'dashboard')
+        ->name('dashboard')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->push('Dashboard', route('dashboard'));
+        })
+    ;
+    Route::view('forms', 'forms')
+        ->name('forms')
+        ->breadcrumbs(function (Trail $trail) {
+            $trail->parent('dashboard')->push('Forms', route('forms'));
+        })
+
+    ;
     Route::view('cards', 'cards')->name('cards');
     Route::view('charts', 'charts')->name('charts');
     Route::view('buttons', 'buttons')->name('buttons');
