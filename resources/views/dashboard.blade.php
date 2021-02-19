@@ -74,6 +74,10 @@
             </div>
         </div>
 
+        <!-- Users -->
+        @livewire('users.show-users')
+
+
         <!-- New Table -->
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">

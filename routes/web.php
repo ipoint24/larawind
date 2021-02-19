@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImpersonationController;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 /*
@@ -22,13 +24,15 @@ Route::get('/', function () {
  })->name('dashboard');
 */
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::view('dashboard', 'dashboard')
+Route::group(['middleware' => ['auth','verified']], function () {
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])
         ->name('dashboard')
         ->breadcrumbs(function (Trail $trail) {
-            $trail->push('Dashboard', route('dashboard'));
-        })
-    ;
+            $trail->push(__('Dashboard'), route('dashboard'));
+        });
+    Route::get('leave-impersonation', [ImpersonationController::class, 'leave'])
+        ->name('leave-impersonation');
+
     Route::view('forms', 'forms')
         ->name('forms')
         ->breadcrumbs(function (Trail $trail) {
