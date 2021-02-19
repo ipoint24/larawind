@@ -1,6 +1,5 @@
 <div>
     <div class="grid gap-2 md:grid-cols-2 xl:grid-cols-4">
-
         <div class="justify-center">
             <button wire:click="create()"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded-lg mt-4">
