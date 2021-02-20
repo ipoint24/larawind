@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
+        "mediconesystems/livewire-datatables": "^0.4.3",
         "spatie/laravel-permission": "^4.0",
         "tabuna/breadcrumbs": "^2.3"
     },
