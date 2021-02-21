@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Traits;
+namespace App\Traits;
 
 use Illuminate\Support\Carbon;
 
-trait DateTimeTrait
+trait DateTime
 {
 
     public function dateForHumans($value)

@@ -25,6 +25,7 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['auth','verified']], function () {
+
     Route::get('/dashboard', [HomeController::class, 'dashboard'])
         ->name('dashboard')
         ->breadcrumbs(function (Trail $trail) {
